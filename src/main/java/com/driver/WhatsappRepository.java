@@ -80,6 +80,7 @@ public class WhatsappRepository {
         List<Message> list=new ArrayList<>();
         if(groupMessageMap.containsKey(group)) list=groupMessageMap.get(group);
         list.add(message);
+        groupMessageMap.put(group,list);
         return list.size();
 
     }
