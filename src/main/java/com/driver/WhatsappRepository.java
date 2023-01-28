@@ -70,7 +70,8 @@ public class WhatsappRepository {
         if(!groupUserMap.containsKey(group)) throw new Exception("Group does not exist");
         boolean check=false;
         for(User user : groupUserMap.get(group)){
-            if(sender.equals(user.getName())){
+            if(sender.equals(user))
+            {
                 check=true;
                 break;
             }
