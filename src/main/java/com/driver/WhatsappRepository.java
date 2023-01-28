@@ -30,9 +30,9 @@ public class WhatsappRepository {
 
     public boolean userExists(String mobileNumber){
         if(userData.containsKey(mobileNumber)){
-            return true;
+            return false;
         }
-        return false;
+        return true;
 
     }
     public String createUser(String name,String mobile){
