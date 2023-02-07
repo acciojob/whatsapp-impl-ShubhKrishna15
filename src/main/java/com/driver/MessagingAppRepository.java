@@ -5,7 +5,7 @@ import java.util.*;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class WhatsappRepository {
+public class MessagingAppRepository {
 
     //Assume that each user belongs to at most one group
     //You can use the below mentioned hashmaps or delete these and create your own.
@@ -17,7 +17,7 @@ public class WhatsappRepository {
     private int customGroupCount;
     private int messageId;
 
-    public WhatsappRepository(){
+    public MessagingAppRepository(){
         this.groupMessageMap = new HashMap<Group, List<Message>>();
         this.groupUserMap = new HashMap<Group, List<User>>();
         this.senderMap = new HashMap<Message, User>();
@@ -104,4 +104,9 @@ public class WhatsappRepository {
         adminMap.put(group,user);
         return "SUCCESS";
     }
+
+//    public int removeUser(User user) throws Exception {
+//        if(adminMap.containsValue(user)) throw new Exception("User is admin itself");
+//        if(!userData.containsKey(user.getName()))
+//    }
 }

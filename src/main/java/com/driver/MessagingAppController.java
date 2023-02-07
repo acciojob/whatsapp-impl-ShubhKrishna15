@@ -2,36 +2,28 @@ package com.driver;
 
 import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("whatsapp")
-public class WhatsappController {
+public class MessagingAppController {
 
     //Autowire will not work in this case, no need to change this and add autowire
-    WhatsappService whatsappService = new WhatsappService();
+    MessagingAppService messagingAppService = new MessagingAppService();
 
     @PostMapping("/add-user")
     public String createUser(String name, String mobile) throws Exception {
         //If the mobile number exists in database, throw "User already exists" exception
         //Otherwise, create the user and return "SUCCESS"
 
-        if(!whatsappService.userExists(mobile)){
+        if(!messagingAppService.userExists(mobile)){
             throw new Exception("User already exists");
         }
 
-        return whatsappService.createUser(name, mobile);
+        return messagingAppService.createUser(name, mobile);
     }
 
     @PostMapping("/add-group")
@@ -45,7 +37,7 @@ public class WhatsappController {
         //For example: Consider userList1 = {Alex, Bob, Charlie}, userList2 = {Dan, Evan}, userList3 = {Felix, Graham, Hugh}.
         //If createGroup is called for these userLists in the same order, their group names would be "Group 1", "Evan", and "Group 2" respectively.
 
-        return whatsappService.createGroup(users);
+        return messagingAppService.createGroup(users);
     }
 
     @PostMapping("/add-message")
@@ -53,7 +45,7 @@ public class WhatsappController {
         // The 'i^th' created message has message id 'i'.
         // Return the message id.
 
-        return whatsappService.createMessage(content);
+        return messagingAppService.createMessage(content);
     }
 
     @PutMapping("/send-message")
@@ -62,7 +54,7 @@ public class WhatsappController {
         //Throw "You are not allowed to send message" if the sender is not a member of the group
         //If the message is sent successfully, return the final number of messages in that group.
 
-        return whatsappService.sendMessage(message, sender, group);
+        return messagingAppService.sendMessage(message, sender, group);
     }
     @PutMapping("/change-admin")
     public String changeAdmin(User approver, User user, Group group) throws Exception{
@@ -71,8 +63,13 @@ public class WhatsappController {
         //Throw "User is not a participant" if the user is not a part of the group
         //Change the admin of the group to "user" and return "SUCCESS". Note that at one time there is only one admin and the admin rights are transferred from approver to user.
 
-        return whatsappService.changeAdmin(approver, user, group);
+        return messagingAppService.changeAdmin(approver, user, group);
     }
+
+//    @DeleteMapping("/remove-user")
+//    public int removeUser(@RequestParam("q") User user) throws Exception {
+//        return whatsappService.removeUser(user);
+//    }
 
 
 

@@ -6,25 +6,28 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class WhatsappService {
+public class MessagingAppService {
 
-    WhatsappRepository whatsappRepository = new WhatsappRepository();
+    MessagingAppRepository messagingAppRepository = new MessagingAppRepository();
     public boolean userExists (String mobileNumber){
-        return whatsappRepository.userExists(mobileNumber);
+        return messagingAppRepository.userExists(mobileNumber);
     }
 
     public String createUser(String name,String mobile){
-        return whatsappRepository.createUser(name,mobile);
+        return messagingAppRepository.createUser(name,mobile);
     }
     public Group createGroup(List<User> users){
-        return whatsappRepository.createGroup(users);
+        return messagingAppRepository.createGroup(users);
     }
+//    public int removeUser(User user) throws Exception {
+//        return whatsappRepository.removeUser(user);
+//    }
 
     public int createMessage(String content){
         // The 'i^th' created message has message id 'i'.
         // Return the message id.
 
-        return whatsappRepository.createMessage(content);
+        return messagingAppRepository.createMessage(content);
     }
 
     public int sendMessage(Message message, User sender, Group group) throws Exception{
@@ -32,7 +35,7 @@ public class WhatsappService {
         //Throw "You are not allowed to send message" if the sender is not a member of the group
         //If the message is sent successfully, return the final number of messages in that group.
 
-        return whatsappRepository.sendMessage(message, sender, group);
+        return messagingAppRepository.sendMessage(message, sender, group);
     }
 
     public String changeAdmin(User approver, User user, Group group) throws Exception{
@@ -41,7 +44,7 @@ public class WhatsappService {
         //Throw "User is not a participant" if the user is not a part of the group
         //Change the admin of the group to "user" and return "SUCCESS". Note that at one time there is only one admin and the admin rights are transferred from approver to user.
 
-        return whatsappRepository.changeAdmin(approver, user, group);
+        return messagingAppRepository.changeAdmin(approver, user, group);
     }
 
 }
